@@ -30,17 +30,14 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Очистка существующих данных
         logger.info("Clearing existing users and roles...");
         userRepository.deleteAll();
         roleRepository.deleteAll();
 
-        // Инициализация ролей
         logger.info("Initializing roles...");
         Role adminRole = initializeRole("ADMIN");
         Role userRole = initializeRole("USER");
 
-        // Инициализация пользователя admin
         logger.info("Initializing admin user...");
         initializeUser(
                 "Admin",
@@ -49,7 +46,6 @@ public class DatabaseInitializer implements CommandLineRunner {
                 Set.of(adminRole)
         );
 
-        // Инициализация пользователя user
         logger.info("Initializing user...");
         initializeUser(
                 "User",
